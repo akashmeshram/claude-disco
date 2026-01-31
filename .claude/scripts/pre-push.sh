@@ -61,9 +61,9 @@ elif [ -f "go.mod" ]; then
     fi
 fi
 
-# 4. Check for large files
+# 4. Check for large files in commits being pushed
 echo -n "Checking for large files... "
-LARGE_FILES=$(git diff --cached --name-only | xargs -I {} sh -c 'test -f "{}" && du -k "{}" | awk "\$1 > 1024 {print \$2}"' 2>/dev/null || true)
+LARGE_FILES=$(git diff --name-only @{u}..HEAD 2>/dev/null | xargs -I {} sh -c 'test -f "{}" && du -k "{}" | awk "\$1 > 1024 {print \$2}"' 2>/dev/null || true)
 if [ -n "$LARGE_FILES" ]; then
     echo -e "${YELLOW}WARNING${NC}"
     echo "  Large files (>1MB): $LARGE_FILES"

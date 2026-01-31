@@ -6,9 +6,15 @@
 # Read error from stdin
 ERROR_JSON=$(cat)
 
-# Extract error type if available
-ERROR_TYPE=$(echo "$ERROR_JSON" | jq -r '.error_type // "unknown"' 2>/dev/null || echo "unknown")
-ERROR_MSG=$(echo "$ERROR_JSON" | jq -r '.message // ""' 2>/dev/null || echo "")
+# Extract error type if available (use jq if available, fallback to grep)
+if command -v jq &> /dev/null; then
+    ERROR_TYPE=$(echo "$ERROR_JSON" | jq -r '.error_type // "unknown"' 2>/dev/null || echo "unknown")
+    ERROR_MSG=$(echo "$ERROR_JSON" | jq -r '.message // ""' 2>/dev/null || echo "")
+else
+    # Fallback: simple grep extraction
+    ERROR_TYPE=$(echo "$ERROR_JSON" | grep -o '"error_type"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "unknown")
+    ERROR_MSG=$(echo "$ERROR_JSON" | grep -o '"message"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "")
+fi
 
 # Provide contextual suggestions based on error type
 case "$ERROR_TYPE" in

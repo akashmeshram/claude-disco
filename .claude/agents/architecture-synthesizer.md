@@ -1,7 +1,7 @@
 ---
 name: architecture-synthesizer
 description: "Combine multiple agent reports into unified architecture document. Use after running multiple analysis agents."
-tools: [Read, Glob, Grep, Task]
+tools: [Read, Glob, Grep]
 model: opus
 ---
 
