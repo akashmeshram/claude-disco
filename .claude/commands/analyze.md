@@ -1,48 +1,73 @@
 ---
 name: analyze
-description: "Run codebase analysis. Usage: /analyze [type] [target]"
+description: "Understand a codebase. Usage: /analyze [what] [where]"
 ---
 
-# Analyze Command
+# /analyze
 
-Run analysis on the codebase or specific files.
+Understand any codebase through focused analysis.
 
-## Usage
+## Examples (start here)
 
-```
+```bash
 /analyze                    # Quick architecture overview
-/analyze full               # Comprehensive multi-agent analysis
-/analyze [type]             # Specific analysis type
-/analyze [type] [path]      # Analyze specific file/directory
+/analyze deps               # Where are the dependencies tangled?
+/analyze perf src/api/      # What's slow in the API?
+/analyze full               # Complete health check
 ```
 
-## Analysis Types
+## What You Can Analyze
 
-| Type | Agent | Description |
-|------|-------|-------------|
-| `arch` | repo-architecture-scanner | Structure, tech stack |
-| `deps` | dependency-analyzer | Imports, cycles |
-| `perf` | performance-analyzer | Bottlenecks |
-| `dead` | dead-code-analyzer | Unused code |
-| `errors` | error-flow-analyzer | Error handling |
-| `state` | state-flow-analyzer | State mutations |
-| `domain` | domain-logic-mapper | Business logic |
-| `api` | interface-contract-analyzer | API contracts |
-| `security` | cross-cutting-concern-analyzer | Auth, validation |
-| `full` | All + synthesizer | Complete audit |
+| What | Question It Answers |
+|------|---------------------|
+| `arch` | How is this organized? |
+| `deps` | What depends on what? Any cycles? |
+| `perf` | What will be slow at scale? |
+| `dead` | What code is never used? |
+| `errors` | Where do errors get swallowed? |
+| `state` | Where does state mutate? |
+| `security` | What's vulnerable? |
+| `full` | All of the above |
 
-## Examples
+## How It Works
 
-```
-/analyze                    # Quick overview
-/analyze deps               # Dependency analysis
-/analyze perf src/api/      # Performance check on api folder
-/analyze full               # Full codebase audit
-```
+1. Parses your request to pick the right analysis type
+2. Launches specialized agent(s) via Task tool
+3. Returns findings with file:line references
 
-## Instructions
+## Tips
 
-1. Parse the arguments to determine analysis type and target
-2. Launch appropriate agent(s) using Task tool
-3. If `full`, run multiple agents in parallel, then synthesize
-4. Present findings in structured format with file references
+- Start with `/analyze` (no args) for orientation
+- Add a path to focus: `/analyze perf src/api/`
+- Use `full` sparingly - it's thorough but slow
+
+## Cognitive Debiasing in Analysis
+
+Analysis is vulnerable to bias. This tool counters:
+
+| Bias | How It Counters |
+|------|-----------------|
+| **Confirmation** | Systematic checks, not just what you expect |
+| **Availability** | Checklist-driven, not memory-driven |
+| **Anchoring** | Comprehensive scan before prioritizing |
+| **Optimism** | Assumes problems exist until proven otherwise |
+
+## Output Structure (Organizational Behavior)
+
+Analysis results are structured for different audiences:
+
+| Section | Audience | Time |
+|---------|----------|------|
+| Summary | Everyone | 30 sec |
+| Key Findings | Tech leads | 5 min |
+| Full Details | Engineers | 30 min |
+
+## Decision Support
+
+Each finding includes:
+- **Evidence** - What indicates this is a problem
+- **Impact** - What happens if not addressed
+- **Priority** - Relative importance
+- **Next step** - What to do about it
+
+This enables decision-making, not just information gathering.

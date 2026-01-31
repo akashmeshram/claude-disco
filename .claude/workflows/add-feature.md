@@ -5,7 +5,17 @@ description: "Workflow for adding a new feature to an existing codebase"
 
 # Add Feature Workflow
 
-Complete guide for adding new features that integrate cleanly with existing code.
+Complete guide for adding new features that integrate cleanly with existing code—designed using software craftsmanship principles to maintain codebase quality over time.
+
+## Why Process Matters
+
+```
+Features added without process:
+  Fast initial development → Growing tech debt → Slowing velocity
+
+Features added with process:
+  Slightly slower start → Sustainable velocity → Easier maintenance
+```
 
 ## Phase 1: Understand Requirements
 
@@ -214,3 +224,58 @@ npm run dev
 - Missing error handling
 - Incomplete test coverage
 - Not updating documentation
+
+## Cognitive Debiasing
+
+### Feature Development Biases
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Scope creep** | "While I'm here, I'll also..." | Stick to acceptance criteria |
+| **Over-engineering** | Building for hypothetical needs | YAGNI—build what's needed now |
+| **Happy path focus** | "It works for normal input" | Explicitly test error cases |
+| **Familiarity** | Implementing your way, not the codebase's way | Match existing patterns first |
+
+### Pre-Implementation Checklist
+
+Before writing code:
+- [ ] Requirements are clear and specific
+- [ ] Acceptance criteria are defined
+- [ ] Existing patterns are understood
+- [ ] Integration points are identified
+- [ ] Test approach is planned
+
+## Human Factors
+
+### Why Features Break Things
+
+| Failure | Cause | Prevention |
+|---------|-------|------------|
+| Regression | Didn't check existing tests | Run full test suite |
+| Integration issue | Didn't understand existing code | `/trace` before implementing |
+| Style mismatch | Didn't follow patterns | `/analyze` existing patterns |
+| Missing edge case | Didn't think through cases | Explicit edge case brainstorm |
+
+### Sustainable Velocity
+
+Adding features quickly = good.
+Adding features that slow future development = bad.
+
+This workflow trades a bit of initial speed for sustained velocity:
+- Understanding existing patterns (saves rework)
+- Writing tests (catches regressions early)
+- Self-review (finds issues before PR)
+
+## Decision Science
+
+### When to Deviate from Patterns
+
+Existing patterns aren't sacred. Deviate when:
+- Pattern doesn't fit use case (document why)
+- Pattern is clearly wrong (propose migration)
+- Better pattern has team consensus (apply consistently)
+
+Don't deviate for:
+- Personal preference
+- "Cleaner" in isolation (but inconsistent with rest)
+- "We'll migrate later" (you probably won't)

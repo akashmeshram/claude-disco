@@ -1,54 +1,69 @@
-# Claude Code Configuration Framework
+# Claude Code Configuration
 
-A portable, reusable configuration system for Claude Code with specialized agents, skills, workflows, and automation.
+A human-centered framework designed to reduce errors, lower cognitive load, and help teams build shared understanding.
 
-## Quick Reference
+## Design Principles
 
-- **Rules**: @.claude/rules.md
-- **Available Commands**: Type `/` to see all commands
-- **Available Skills**: Type `/` to see all skills
+### Cognitive Economy
+Minimize mental effort. You have ~4 items of working memory—we design for that.
 
-## Project Structure
+### Error Prevention
+Make the right thing easy and the wrong thing hard. Fail-safe defaults.
+
+### Shared Understanding
+Configuration that creates common mental models across your team.
+
+### Decision Support
+Tools that counteract cognitive biases, not amplify them.
+
+## Quick Start
+
+```bash
+/analyze              # Orient yourself in any codebase
+/review file.ts       # Get feedback before it's too late
+/debug "description"  # Systematic problem-solving
+```
+
+## Command Patterns
+
+Commands follow predictable **verb-noun** structure:
+
+| Pattern | Examples |
+|---------|----------|
+| `/analyze [what]` | `/analyze`, `/analyze deps`, `/analyze perf` |
+| `/check-[aspect]` | `/check-perf`, `/check-errors` |
+| `/[action] [target]` | `/fix lint`, `/test utils.ts` |
+
+When in doubt: type `/` and scan the list.
+
+## Mental Model
+
+```
+Commands → invoke actions (you call them)
+Skills   → provide knowledge (auto-activated)
+Agents   → deep analysis (via Task tool)
+Hooks    → safety rails (run automatically)
+```
+
+## Error Prevention
+
+These run automatically to catch mistakes:
+- **pre-commit**: Secrets, debug code, lint errors
+- **pre-push**: Tests, WIP commits, large files
+- **post-edit**: Auto-formatting
+
+## Structure
 
 ```
 .claude/
-├── agents/      # Specialized analysis agents (use with Task tool)
-├── skills/      # Invocable skills (/skill-name)
-├── commands/    # Slash commands
-├── workflows/   # Multi-step processes
-├── templates/   # Language/framework patterns
-├── hooks/       # Automation documentation
-└── scripts/     # Executable hook scripts
-```
-
-## Key Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/analyze` | Run codebase analysis |
-| `/review` | Code review |
-| `/test` | Generate tests |
-| `/fix` | Auto-fix issues |
-| `/report` | Generate analysis report |
-
-## Usage Patterns
-
-### Codebase Analysis
-```
-/analyze arch           # Architecture overview
-/analyze deps           # Dependency analysis
-/analyze perf src/      # Performance check
-/analyze full           # Complete audit
-```
-
-### Development
-```
-/create component Button    # Generate component
-/test src/utils.ts          # Generate tests
-/fix lint src/              # Fix lint issues
-/review PR-123              # Review pull request
+├── rules.md      # Team conventions
+├── agents/       # Deep analysis specialists
+├── skills/       # Auto-invoked knowledge
+├── commands/     # Explicit actions
+└── scripts/      # Safety automation
 ```
 
 ## Customization
 
-Add project-specific rules in `.claude/rules.local.md` (gitignored).
+Create `.claude/rules.local.md` for project-specific rules.
+Team rules go in `.claude/rules.md` (version controlled).

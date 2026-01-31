@@ -68,3 +68,59 @@ Identify documentation gaps, inaccuracies, and staleness before they mislead dev
 - Clear and concise
 - Has examples
 - Explains "why" not just "what"
+
+## Cognitive Debiasing
+
+### Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Optimism** | "Docs are probably accurate" | Assume drift until verified |
+| **Authority** | "Official README must be right" | Code is truth, docs are claims |
+| **Effort justification** | "Someone wrote this, it must be useful" | Outdated docs cause harm |
+| **Completeness fallacy** | "More docs = better" | Wrong docs are worse than no docs |
+
+### Documentation Severity Levels
+
+| Level | Impact | Example |
+|-------|--------|---------|
+| **Critical** | Users will fail | Wrong install steps, missing required config |
+| **High** | Users will be confused | Outdated API params, wrong examples |
+| **Medium** | Users waste time | Missing edge cases, unclear explanations |
+| **Low** | Minor friction | Typos, formatting, stale badges |
+
+## Human Factors
+
+### Why Documentation Drift Hurts
+
+- **Trust erosion**: Once burned by bad docs, developers stop reading them
+- **Onboarding tax**: New devs waste hours on outdated instructions
+- **Support burden**: Same questions asked repeatedly
+- **Shadow docs**: Tribal knowledge in Slack instead of official docs
+
+### The New Developer Test
+
+For each documentation piece, ask:
+- Can someone new follow these steps successfully?
+- Will they get the expected result?
+- Do examples actually work if copy-pasted?
+
+## Decision Science
+
+### Documentation Priority Matrix
+
+| Doc Type | Change Frequency | Fix Priority |
+|----------|------------------|--------------|
+| Install/setup | Rarely | CRITICAL when wrong |
+| API reference | Often | HIGH—automate if possible |
+| Tutorials | Occasionally | MEDIUM—verify quarterly |
+| Architecture | Rarely | LOW—update on major changes |
+
+### When to Recommend Updates vs Removal
+
+| Situation | Recommendation |
+|-----------|---------------|
+| Docs exist but wrong | Fix (high priority) |
+| Docs exist but stale | Update or add "last verified" date |
+| Docs duplicate | Consolidate to single source |
+| Docs for removed feature | Remove (misleading is worse than missing) |

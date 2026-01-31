@@ -1,58 +1,103 @@
 # Project Rules
 
-## Code Quality
+## Core Principle
 
-### Evidence-Based Changes
-- Read code before modifying it
-- Cite file paths and line numbers when discussing code
-- Don't assume behavior from names—verify from implementation
+**Design for the tired, stressed developer at 2am.** Every rule should make their job easier, not harder.
 
-### Minimal Changes
-- Only change what's necessary for the task
-- Don't refactor unrelated code
-- Don't add features not requested
-- Don't add comments, docstrings, or type hints to unchanged code
+## Before You Change Code
 
-### No Over-Engineering
-- Prefer simple solutions over clever ones
-- Don't create abstractions for one-time operations
-- Don't add error handling for impossible scenarios
-- Don't design for hypothetical future requirements
+### STOP - THINK - OBSERVE - PLAN
 
-## Analysis Standards
+1. **Stop**: Don't jump to solutions. Understand first.
+2. **Think**: What problem are we actually solving?
+3. **Observe**: Read the code. Check the tests. Look at history.
+4. **Plan**: Small changes. One thing at a time.
 
-### When Using Analysis Agents
-- Always provide file:line references for findings
-- Use confidence levels (High/Medium/Low) for uncertain findings
-- Mark uncertainty explicitly: `[UNCERTAIN]`, `[AMBIGUOUS]`
-- Prioritize findings by impact, not by interest
+This counters the *action bias*—the tendency to do something rather than nothing.
 
-### Output Format
-- Use tables for structured data
-- Use code blocks for call graphs and flow diagrams
-- Keep prose minimal—let data speak
+### Evidence Over Intuition
+
+- Read code before modifying—names lie, implementations don't
+- Cite `file:line` when discussing code
+- If you can't point to evidence, you're guessing
+
+## While Changing Code
+
+### Minimize Cognitive Load
+
+- **One concept per function** - If it needs "and" to describe, split it
+- **Familiar words over jargon** - "login" not "authentication"
+- **Boring over clever** - The next reader might be you, exhausted
+
+### Error Prevention by Design
+
+- Make invalid states unrepresentable
+- Fail fast, fail clearly
+- Default to safe (deny by default, explicit opt-in)
+
+### Match Existing Patterns
+
+Consistency reduces mental overhead. A codebase with one style (even imperfect) beats a codebase with five "better" styles.
+
+## Analysis & Communication
+
+### Structure for Skimming
+
+- Tables for structured data
+- Code blocks for flows
+- Bold for emphasis (sparingly)
+- Findings ordered by impact, not discovery order
+
+### Acknowledge Uncertainty
+
+| Marker | Meaning |
+|--------|---------|
+| `[UNCERTAIN]` | Can't verify from code alone |
+| `[HIGH/MEDIUM/LOW]` | Confidence level |
+| `[ASSUMPTION]` | Requires validation |
+
+This counters *overconfidence bias*.
+
+### Prioritize by Impact
+
+Not everything matters equally. Order by:
+1. What could cause data loss or security breach
+2. What blocks other work
+3. What causes daily friction
+4. What would be nice
 
 ## Git Practices
 
 ### Commits
-- Don't commit unless explicitly asked
-- Use conventional commit format: `type: description`
-- Don't amend commits unless explicitly asked
+
+- Only commit when explicitly asked
+- Format: `type: description` (feat, fix, refactor, docs, test)
+- Never amend unless asked (prevents losing work)
 - Never force push to main/master
 
-### Before Committing
-- Run tests if available
-- Check for secrets (.env, credentials)
-- Stage specific files, not `git add -A`
+### Pre-Commit Checklist
 
-## Communication
+Before every commit, verify:
+- [ ] No secrets (.env, API keys)
+- [ ] No debug code (console.log, debugger)
+- [ ] Tests pass (if they exist)
+- [ ] Changes are staged intentionally (not `git add -A`)
 
-### Be Direct
-- State findings clearly without hedging
-- If something is broken, say so
-- If you're uncertain, say so with what would resolve it
+Checklists prevent *omission errors*—the mistakes we make by forgetting steps.
 
-### No Fluff
-- Skip unnecessary praise or validation
-- Don't explain what you're about to do—just do it
-- Keep status updates brief
+## Team Knowledge Sharing
+
+### Write for Your Replacement
+
+Code should be understandable without you explaining it. Comments explain *why*, not *what*.
+
+### Document Decisions, Not Just Code
+
+When you make a non-obvious choice, leave a trail:
+```
+// We use polling instead of websockets here because
+// the infrastructure doesn't support persistent connections.
+// See: ARCH-123
+```
+
+This creates *shared mental models* across the team.

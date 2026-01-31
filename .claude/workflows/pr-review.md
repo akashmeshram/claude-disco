@@ -5,7 +5,18 @@ description: "Comprehensive PR review workflow"
 
 # Pull Request Review Workflow
 
-Thorough, consistent PR reviews.
+Thorough, consistent PR reviews designed to counter the cognitive biases that make reviewers miss issues.
+
+## Why Reviews Matter
+
+```
+Cost to fix at:
+  Code Review:    1x
+  Testing:       10x
+  Production:   100x
+```
+
+Reviews are the cheapest place to catch bugs—but bias undermines them.
 
 ## Pre-Review
 
@@ -155,3 +166,55 @@ Because:
 - [ ] Monitor for issues
 - [ ] Check deployment
 - [ ] Verify in staging/production
+
+## Cognitive Debiasing for Reviewers
+
+### Biases That Affect Reviews
+
+| Bias | How It Shows | Counter |
+|------|--------------|---------|
+| **Anchoring** | First impression dominates | Read whole PR before commenting |
+| **Halo effect** | Senior author = good code | Review the code, not the author |
+| **Confirmation** | Looking for familiar issues | Use checklist for unfamiliar ones |
+| **Social pressure** | Hesitating to critique | Focus on code, not person |
+| **LGTM fatigue** | Rubber-stamping after first few files | Take breaks on large PRs |
+
+### Review Quality Checklist
+
+Before approving, verify you actually checked:
+- [ ] Understood the purpose (not just skimmed)
+- [ ] Checked error paths, not just happy path
+- [ ] Considered edge cases
+- [ ] Verified tests match the change
+- [ ] Asked clarifying questions when unsure
+
+## Human Factors
+
+### Why Large PRs Get Poor Reviews
+
+```
+PR Size → Review Quality (inverse correlation)
+
+< 200 lines: Thorough review
+200-400 lines: Good review
+400-800 lines: Declining attention
+> 800 lines: "LGTM" (barely read)
+```
+
+**Ask authors to split large PRs.**
+
+### Feedback That Helps
+
+| Instead of... | Try... |
+|---------------|--------|
+| "This is wrong" | "This might cause X when Y happens" |
+| "Why did you...?" | "Help me understand the reasoning for..." |
+| "You should..." | "Consider... because..." |
+| "Obviously..." | (Nothing is obvious to everyone) |
+
+### Review Fatigue Prevention
+
+- Review max 400 lines per session
+- Take 5-minute breaks between PRs
+- Review hardest code when freshest (morning)
+- Explicitly state your confidence: "I haven't reviewed the auth changes deeply"

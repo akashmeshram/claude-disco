@@ -77,9 +77,69 @@ await db.update(to, +amount)  // What if this fails?
 | Priority | Issue | Location | Fix |
 |----------|-------|----------|-----|
 
+## Cognitive Debiasing
+
+### State Analysis Biases
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Happy path focus** | Assuming orderly execution | Consider concurrent and failure paths |
+| **Single-threaded thinking** | "This runs sequentially" | Identify all concurrent access points |
+| **Optimism** | "Race conditions are rare" | If concurrent access exists, races happen |
+| **Familiarity** | Checking known state locations | Scan for hidden state (globals, closures, module scope) |
+
+### State Bug Patterns
+
+| Pattern | Why It Happens | Detection |
+|---------|----------------|-----------|
+| Read-modify-write races | No atomicity | Look for gaps between read and write |
+| Stale cache | Missing invalidation | Trace update paths |
+| Lost updates | No locking | Concurrent write points |
+| Inconsistent state | Partial transactions | Multi-step operations |
+
+## Human Factors
+
+### Why State Bugs Are Hard
+
+- **Non-deterministic**: Works most of the time
+- **Hard to reproduce**: Timing-dependent
+- **Invisible**: State lives in memory, not in code
+- **Distributed**: State spans multiple systems
+
+### Debugging State Issues
+
+```
+1. Map all state locations (not just the obvious ones)
+2. Identify all mutation points
+3. Check synchronization at each point
+4. Trace the bug scenario step by step
+5. Consider concurrent execution
+```
+
+## Decision Science
+
+### State Management Trade-offs
+
+| Approach | Pros | Cons | When to Use |
+|----------|------|------|-------------|
+| Optimistic locking | High throughput | Conflicts require retry | Read-heavy workloads |
+| Pessimistic locking | No conflicts | Lower throughput | Write-heavy workloads |
+| Event sourcing | Full history | Complexity | Audit requirements |
+| CQRS | Scalable reads | Eventual consistency | High-scale reads |
+
+### Prioritizing State Issues
+
+| Factor | Weight | Question |
+|--------|--------|----------|
+| Data corruption risk | 40% | Could this corrupt persistent data? |
+| Frequency | 30% | How often does this code path execute? |
+| Detectability | 20% | Would we notice if this went wrong? |
+| Fix complexity | 10% | How hard is the fix? |
+
 ## Principles
 
 - **Map all state types** - Not just database
 - **Trace mutations** - Who can change what
 - **Check concurrency** - Locks, transactions, atomic ops
 - **Verify invalidation** - Caches must be invalidated correctly
+- **Acknowledge uncertainty** - Race conditions are probabilistic

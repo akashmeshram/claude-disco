@@ -117,6 +117,62 @@ Compare documentation against code:
 - Explain what would verify it
 - Suggest safe ways to test (add logging, search for dynamic usage)
 
+## Cognitive Debiasing
+
+### Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Overconfidence** | "No references = definitely dead" | Check dynamic usage, framework conventions |
+| **Confirmation** | Looking for expected dead code patterns | Systematic scan, don't skip unfamiliar areas |
+| **Recency** | Old code seems more dead | Age doesn't indicate usage |
+| **Availability** | Flagging patterns seen in past cleanups | Use checklist, not memory |
+
+### False Positive Prevention
+
+Before marking code as dead, verify:
+- [ ] Not a public API consumed externally
+- [ ] Not a framework convention (test_*, __init__, etc.)
+- [ ] Not called via reflection/dynamic import
+- [ ] Not an entry point in config files
+- [ ] Not activated by feature flags
+
+## Human Factors
+
+### Why Dead Code Matters
+
+- **Cognitive load**: Every line is mental overhead
+- **Maintenance cost**: Dead code gets "maintained" accidentally
+- **Misleading**: "This function exists, it must be used"
+- **Test overhead**: Dead code still runs in CI
+
+### Safe Removal Process
+
+```
+1. Mark as @deprecated (don't delete immediately)
+2. Add logging to verify it's not called
+3. Wait one release cycle
+4. Remove with confidence
+```
+
+## Decision Science
+
+### Removal Prioritization
+
+| Factor | Weight | Question |
+|--------|--------|----------|
+| Confidence | 40% | How certain is it unused? |
+| Size | 30% | How much code is it? |
+| Confusion risk | 20% | Does it mislead developers? |
+| Test overhead | 10% | Does it slow CI? |
+
+### When NOT to Remove
+
+- Code that documents "why not this approach"
+- Scaffolding for planned features (check with team)
+- Examples/templates intended for copying
+- When removal creates merge conflicts in active PRs
+
 ## Self-Verification
 
 Before finalizing:
@@ -124,3 +180,4 @@ Before finalizing:
 - Verify "unused" imports aren't used for side effects
 - Confirm "unused" functions aren't callbacks or handlers
 - Validate recommendations are actionable and safe
+- Acknowledge uncertainty where appropriate

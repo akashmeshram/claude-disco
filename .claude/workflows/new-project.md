@@ -5,7 +5,18 @@ description: "Complete workflow for creating a new project from scratch"
 
 # New Project Workflow
 
-Full guide for creating a new project with proper structure, configuration, and setup.
+Full guide for creating a new project with proper structure, configuration, and setup—designed using systems thinking to prevent early decisions from becoming long-term constraints.
+
+## Why Proper Setup Matters
+
+```
+Technical debt starts at project creation:
+  Poor structure → Refactoring later = expensive
+  Missing config → Added later = inconsistent
+  No tests → Added later = incomplete
+
+Getting it right early is 10x cheaper than fixing later.
+```
 
 ## Phase 1: Requirements Gathering
 
@@ -201,3 +212,57 @@ After project creation:
 2. `/test` to add more tests
 3. `/analyze` to check quality
 4. `/review` before merging PRs
+
+## Decision Science
+
+### Technology Selection
+
+Avoid analysis paralysis with these criteria:
+
+| Factor | Weight | Question |
+|--------|--------|----------|
+| Team familiarity | 30% | Does the team know this? |
+| Community support | 25% | Can we find help/hiring? |
+| Problem fit | 25% | Does it solve our problem well? |
+| Long-term viability | 20% | Will it be maintained in 5 years? |
+
+### New vs. Familiar Technology
+
+| Situation | Preference |
+|-----------|------------|
+| Critical project, tight deadline | Familiar tech |
+| Learning project, flexible timeline | Can try new tech |
+| Team has experts | Their expertise |
+| Team is new | Industry standard |
+
+## Human Factors
+
+### Common New Project Mistakes
+
+| Mistake | Why It Happens | Prevention |
+|---------|----------------|------------|
+| Over-engineering | "We might need it" | YAGNI—add when needed |
+| Under-documenting | "I'll remember" | Document as you go |
+| Skipping tests | "It's just a prototype" | Prototype → Production happens fast |
+| Copy-paste security | "We'll harden later" | Secure by default |
+
+### Making Projects Approachable
+
+New contributors should be able to:
+- Understand purpose in 2 minutes (README)
+- Run locally in 10 minutes (setup script)
+- Make first change in 30 minutes (good first issue)
+
+## Cognitive Load Management
+
+### Progressive Complexity
+
+Don't configure everything upfront:
+
+| Phase | Configure | Skip |
+|-------|-----------|------|
+| Day 1 | Build, test, lint | Advanced CI, monitoring |
+| Week 1 | CI/CD, deploy | Performance testing |
+| Month 1 | Monitoring, alerts | Optimization |
+
+Add complexity as you need it, not before.

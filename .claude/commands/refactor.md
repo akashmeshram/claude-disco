@@ -66,3 +66,44 @@ Apply refactoring #1? (y/n)
 - Require test pass after each change
 - One refactoring at a time
 - Easy rollback with git
+
+## Cognitive Debiasing
+
+### Refactoring Biases to Counter
+
+| Bias | Trap | How /refactor Counters |
+|------|------|------------------------|
+| **Shiny object** | Refactoring interesting code | Prioritizes by impact, not interest |
+| **Perfectionism** | "While I'm here..." | Scope enforcement, one change at a time |
+| **Overconfidence** | "This is obviously safe" | Requires tests, shows diffs |
+| **Familiarity** | Refactoring code you know | Systematic analysis, not intuition |
+
+## Human Factors
+
+### Why Refactoring Feels Risky
+
+- **No visible progress**: No new features shipped
+- **Break things**: Working code might stop working
+- **Scope creep**: "Just one more change..."
+- **Review burden**: PRs that change many files
+
+### Making Refactoring Safe
+
+This command enforces safe practices:
+1. **Small steps**: One refactoring at a time
+2. **Test verification**: Tests must pass after each step
+3. **Explicit diffs**: See exactly what changes
+4. **Easy rollback**: Git makes reverting trivial
+
+## Decision Science
+
+### When to Refactor
+
+Refactor when cost of not refactoring > cost of refactoring:
+
+```
+Cost of keeping = (Confusion × Read frequency) + (Bug risk × Bug cost)
+Cost of refactoring = Engineering time + Review time + Risk of bugs
+```
+
+This command helps estimate both sides.

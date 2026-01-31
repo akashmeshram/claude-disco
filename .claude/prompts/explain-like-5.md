@@ -96,3 +96,43 @@ waiting for the server every time.
 ## Want to Go Deeper?
 I can explain cache invalidation, cache strategies (LRU, TTL),
 or when NOT to use caching.
+
+## Cognitive Psychology Behind This Approach
+
+### Why Simple Explanations Work
+
+Learning research shows:
+- **Dual coding**: Words + mental images = better retention
+- **Elaborative interrogation**: "Why?" questions deepen understanding
+- **Prior knowledge activation**: Analogies connect new to known
+
+### The Curse of Knowledge
+
+Experts often explain badly because they:
+- Forget what it's like not to know
+- Use jargon automatically
+- Skip "obvious" steps
+
+This prompt counters by:
+- Forcing analogies (connects to prior knowledge)
+- Banning jargon (forces clear thinking)
+- Building up gradually (no skipped steps)
+
+### Feynman Technique
+
+Named after physicist Richard Feynman:
+1. Choose concept
+2. Explain to a child
+3. Identify gaps in your explanation
+4. Simplify and use analogies
+
+If you can't explain it simply, you don't understand it deeply.
+
+## When Simple Isn't Enough
+
+After the simple explanation, offer:
+- **Level 2**: More technical details
+- **Level 3**: Edge cases and gotchas
+- **Level 4**: Implementation details
+
+Let the learner control the depth.

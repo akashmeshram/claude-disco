@@ -5,7 +5,14 @@ description: "Debug production issues workflow"
 
 # Incident Response Workflow
 
-Systematic approach to production issues.
+Systematic approach to production issues. Designed using human factors engineering to prevent common incident response mistakes.
+
+## Why This Matters
+
+Incidents are high-stress situations where cognitive biases cause poor decisions:
+- **Action bias**: Doing something feels better than investigating
+- **Anchoring**: First hypothesis dominates even when wrong
+- **Tunnel vision**: Missing obvious causes while debugging complex theories
 
 ## Phase 1: Assess (First 5 minutes)
 
@@ -169,3 +176,49 @@ Example:
 - [ ] Schedule postmortem
 - [ ] Update runbooks
 - [ ] Improve monitoring
+
+## Cognitive Debiasing During Incidents
+
+### Common Traps
+
+| Trap | Symptom | Counter |
+|------|---------|---------|
+| **Action bias** | Immediate fixes without investigation | 5 minutes to assess before acting |
+| **Anchoring** | "It's definitely the deploy" | Generate 3 hypotheses before investigating |
+| **Availability** | Blaming recent similar incidents | Check all possibilities, not just familiar ones |
+| **Sunk cost** | Continuing failed fix approach | Set 15-minute timeboxes, reassess |
+
+### Incident Commander Checklist
+
+Before each decision point:
+- [ ] Do we have evidence, or are we guessing?
+- [ ] What would we expect if our hypothesis is wrong?
+- [ ] Are we fixing root cause or symptoms?
+- [ ] What's our rollback plan?
+
+## Human Factors
+
+### Decision Fatigue Prevention
+
+- **Rotate roles** every 30 minutes in long incidents
+- **Take breaks** — fresh eyes catch obvious issues
+- **Write things down** — working memory fails under stress
+- **Use checklists** — don't rely on memory
+
+### Communication Template
+
+Clear communication reduces cognitive load:
+```
+[TIME] | [STATUS] | [IMPACT] | [NEXT ACTION] | [ETA]
+
+Example:
+14:32 | Investigating | 10% error rate | Checking DB connections | 10 min
+```
+
+### Post-Incident Learning
+
+The goal of postmortems is prevention, not blame:
+- What made this hard to detect?
+- What made this hard to diagnose?
+- What made this hard to fix?
+- How do we prevent similar incidents?

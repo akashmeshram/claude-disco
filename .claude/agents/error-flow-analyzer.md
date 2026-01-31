@@ -85,9 +85,58 @@ OriginalError (file:line)
 | Priority | Location | Issue | Fix |
 |----------|----------|-------|-----|
 
+## Cognitive Debiasing
+
+### Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Happy path focus** | Error paths get less attention | Explicitly trace both paths |
+| **Optimism** | "That exception won't happen" | Assume all exceptions happen |
+| **Confirmation** | Finding expected patterns, missing unexpected | Systematic checklist for all error types |
+| **Complexity avoidance** | Skipping tangled try/catch blocks | Tangled blocks need most attention |
+
+### Error Severity Hierarchy
+
+| Level | Impact | Examples |
+|-------|--------|----------|
+| **Critical** | Data corruption, security breach | Silent catch that continues with bad state |
+| **High** | User-facing failure, data loss | Unhandled promise rejection |
+| **Medium** | Degraded experience | Generic error message hiding root cause |
+| **Low** | Operational noise | Logged but not actionable |
+
+## Human Factors
+
+### Why Error Handling Matters
+
+- **Silent failures compound**: One swallowed error leads to confusing downstream bugs
+- **Context loss frustrates**: Generic "Something went wrong" = hours of debugging
+- **Inconsistency confuses**: Different error patterns = cognitive load for maintainers
+
+### The 3 AM Test
+
+For each error path, ask: "Can the oncall engineer at 3 AM understand what went wrong?"
+
+- [ ] Error message describes the problem
+- [ ] Error includes context (what was being attempted)
+- [ ] Stack trace or location is preserved
+- [ ] Actionable information is available
+
+## Decision Science
+
+### Prioritization
+
+| Error Pattern | Risk Score | Fix Effort | Priority |
+|---------------|------------|------------|----------|
+| Silent catch | HIGH | LOW | P0 |
+| Lost context | MEDIUM | LOW | P1 |
+| Inconsistent returns | MEDIUM | MEDIUM | P2 |
+| Missing handler | Depends | Depends | Assess |
+
 ## Principles
 
 - **Trace full path** - From origin to final handler
 - **Check all branches** - Happy path AND error paths
 - **Note transformations** - Where errors are wrapped/modified
 - **Severity by impact** - Silent data corruption > logged warning
+- **Acknowledge uncertainty** - Note when static analysis can't determine handler

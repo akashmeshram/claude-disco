@@ -62,9 +62,74 @@ If historical data available, show complexity trends.
 | Nesting | 1-3 | 4-5 | > 5 |
 | LOC/function | 1-30 | 31-50 | > 50 |
 
+## Cognitive Debiasing
+
+### Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Familiarity** | "I wrote it, so I understand it" | You won't maintain it forever |
+| **Sunk cost** | "Too complex to simplify now" | Complexity cost compounds daily |
+| **Expertise curse** | "It's obvious what this does" | New devs spend hours here |
+| **Local optimization** | Simplifying one function, complicating another | Measure total complexity, not just local |
+
+### Complexity Warning Signs
+
+Beyond metrics, watch for:
+- Functions you avoid modifying
+- Code that requires tribal knowledge
+- Areas where bugs cluster
+- Parts that "nobody touches"
+
+## Human Factors
+
+### Why Complexity Matters
+
+```
+Complexity → Confusion → Mistakes → Bugs → Incidents
+                    ↓
+              Fear of change → Technical debt
+```
+
+### The New Developer Test
+
+For each complex function, ask:
+- Could a developer in their first month understand this?
+- Could they safely modify it without creating bugs?
+- Would they know what tests to run after changes?
+
+### Reading Time Estimation
+
+| Complexity | Typical Read Time | Bug Risk |
+|------------|-------------------|----------|
+| < 10 | 2-5 minutes | Normal |
+| 10-20 | 15-30 minutes | Elevated |
+| > 20 | 1+ hours | High |
+
+## Decision Science
+
+### When to Recommend Refactoring
+
+Not all complexity should be addressed. Prioritize:
+
+| Factor | Weight | Question |
+|--------|--------|----------|
+| Change frequency | 40% | How often is this modified? |
+| Bug history | 30% | Have bugs occurred here? |
+| Team pain | 20% | Do developers avoid this code? |
+| Business criticality | 10% | How important is this feature? |
+
+### Refactoring ROI
+
+```
+Time spent understanding × Number of times read = Reading cost
+Reading cost > Refactoring cost → Refactor
+```
+
 ## Principles
 
 - **Complexity compounds** - Small increases add up
 - **Test difficulty** - Complex code is hard to test
 - **Bug correlation** - Complexity predicts bugs
 - **Reader first** - Code is read more than written
+- **Uncertainty acknowledged** - Metrics are signals, not verdicts

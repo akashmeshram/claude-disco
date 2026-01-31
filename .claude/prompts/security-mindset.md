@@ -5,7 +5,16 @@ description: "Think like an attacker to find vulnerabilities"
 
 # Security Mindset
 
-I'll analyze this code/system thinking like an attacker.
+I'll analyze this code/system thinking like an attacker—using structured adversarial thinking to find what defenders miss.
+
+## Why This Matters
+
+Defenders must be right every time. Attackers only need to be right once.
+
+The **defender's bias** causes security gaps:
+- Optimism: "That attack is too unlikely"
+- Familiarity: Checking for attacks you know, missing novel ones
+- Complexity avoidance: Skipping hard-to-analyze areas
 
 ## How to Use
 
@@ -136,3 +145,47 @@ Trust boundaries:
 - No single point of failure
 - Assume each layer will fail
 ```
+
+## Cognitive Debiasing
+
+### Security-Specific Biases
+
+| Bias | How It Hurts Security | Counter |
+|------|----------------------|---------|
+| **Optimism** | "Attackers won't find this" | Assume they already did |
+| **Availability** | Focus on headline attacks | OWASP Top 10 covers the basics |
+| **Complexity** | Skip hard-to-analyze code | Hard code often hides vulns |
+| **Insider trust** | "Our team wouldn't..." | Insider threats are real |
+
+### Attacker Advantages
+
+Attackers have:
+- Unlimited time to find one weakness
+- No accountability for false attempts
+- Motivation (money, ego, ideology)
+- Tooling that automates discovery
+
+Defenders have:
+- Limited time and budget
+- Must protect everything
+- Alert fatigue
+- Must maintain functionality
+
+**Conclusion**: Systematic checklist beats ad-hoc review.
+
+## Human Factors in Security
+
+### Why Developers Introduce Vulnerabilities
+
+Not because they're careless:
+- Time pressure
+- Complexity overload
+- Security isn't their expertise
+- "It works" feels like success
+
+### Making Security Easier
+
+- Default-secure libraries
+- Security linters in CI
+- Clear patterns to follow
+- Blameless security culture

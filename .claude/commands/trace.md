@@ -56,3 +56,60 @@ Input → validate() → transform() → persist() → Output
 4. Document every transformation and side effect
 5. Mark uncertainty explicitly
 6. Cite file:line for all claims
+
+## Cognitive Debiasing
+
+### Tracing Biases
+
+| Bias | Trap | How /trace Counters |
+|------|------|---------------------|
+| **Assumption** | "I know what this does" | Forces explicit verification |
+| **Naming trust** | Believing function names | Verifies behavior against name |
+| **Familiarity** | Skipping "obvious" code | Traces everything systematically |
+| **Happy path** | Only tracing success | Includes error branches |
+
+### Evidence Hierarchy
+
+1. **Actual behavior** - What the code does (most reliable)
+2. **Test assertions** - What tests verify (trustworthy)
+3. **Type signatures** - What's declared (usually reliable)
+4. **Comments/docs** - What's claimed (verify against code)
+5. **Names** - What's implied (often misleading)
+
+## Human Factors
+
+### Why Code Tracing Matters
+
+- **Understanding**: Can't fix what you don't understand
+- **Bug location**: Traces narrow down where issues occur
+- **Impact analysis**: Know what changes affect
+- **Onboarding**: New devs need to trace to learn
+
+### Mental Model Building
+
+Tracing helps build mental models:
+```
+Entry → [What happens?] → Exit
+         ↓
+     Side effects?
+         ↓
+     Error cases?
+```
+
+## Decision Science
+
+### When to Trace
+
+| Situation | Trace Depth |
+|-----------|------------|
+| Quick bug fix | Just affected code |
+| Feature change | Feature + dependencies |
+| Architecture understanding | Full paths |
+| Incident investigation | Deep, including failures |
+
+### Uncertainty Acknowledgment
+
+If analysis can't determine behavior with confidence:
+- Mark `[UNCERTAIN]` with reason
+- Suggest how to verify
+- Don't guess without evidence

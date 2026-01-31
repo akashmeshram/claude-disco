@@ -1,261 +1,168 @@
 # Claude Code Configuration Framework
 
-Portable, reusable Claude Code configuration with specialized agents, skills, commands, workflows, templates, and automation hooks.
+A human-centered configuration framework designed through the lens of seven disciplines: **systems design**, **software craftsmanship**, **cognitive psychology**, **human-computer interaction**, **organizational behavior**, **decision science**, and **human factors engineering**.
+
+## Design Philosophy
+
+### From Cognitive Psychology
+**Reduce mental load.** Working memory holds ~4 items. We chunk information, use progressive disclosure, and favor recognition over recall.
+
+### From Decision Science
+**Counter cognitive biases.** Checklists prevent omission errors. The STOP protocol counters action bias. Multiple hypotheses counter confirmation bias.
+
+### From Human Factors Engineering
+**Design for error prevention.** Make the right thing easy and the wrong thing hard. Fail-safe defaults. Defense in depth.
+
+### From Organizational Behavior
+**Build shared understanding.** Documentation creates common mental models. Output is structured for different audiences (executives, leads, engineers).
+
+### From Systems Design
+**Separation of concerns.** Agents analyze. Commands invoke. Skills extend. Hooks automate. Each has clear boundaries.
+
+### From Software Craftsmanship
+**Empathy for the reader.** Code and configuration are written for the developer at 2am. Boring beats clever.
+
+### From HCI
+**Human-first interaction.** Examples before theory. Guessable patterns. Helpful errors with suggestions.
+
+## Quick Start
+
+```bash
+/analyze              # Orient yourself in unfamiliar code
+/debug "description"  # Systematic problem-solving
+/review file.ts       # Feedback before problems compound
+```
 
 ## What's Included
 
 ```
 .claude/
-├── settings.json     # Hook configurations (auto-executed)
-├── rules.md          # Code quality & analysis standards
-├── agents/           # 21 specialized agents with tool specs
-├── skills/           # 14 invocable skills (SKILL.md format)
-├── commands/         # 19 slash commands
-├── workflows/        # 7 multi-step workflows
-├── templates/        # 9 language/framework templates
-├── hooks/            # Hook documentation
-├── scripts/          # Executable hook scripts
-└── prompts/          # 5 reusable prompt modes
+├── rules.md          # Team conventions (cognitive load optimized)
+├── settings.json     # Hook configurations
+├── agents/           # 21 specialized analysts
+├── skills/           # 14 auto-invoked capabilities
+├── commands/         # 19 explicit actions
+├── workflows/        # 7 multi-step processes
+├── templates/        # 9 language patterns
+├── scripts/          # 4 safety automation hooks
+└── prompts/          # 5 conversation modes
 ```
 
-## Quick Install
+## Commands by Intent
 
-```bash
-# Copy to your project
-cp -r .claude /path/to/your/project/
-cp CLAUDE.md /path/to/your/project/
+### Understanding (reduce uncertainty)
+| Command | When to Use |
+|---------|-------------|
+| `/analyze` | Get oriented in unfamiliar code |
+| `/explain` | Understand how something works |
+| `/trace` | Follow a specific code path |
 
-# Or use the install script
-./install.sh /path/to/your/project
-```
+### Improving (reduce defects)
+| Command | When to Use |
+|---------|-------------|
+| `/review` | Get feedback before problems compound |
+| `/fix` | Auto-fix lint/type/format issues |
+| `/refactor` | Restructure without changing behavior |
 
-## Agents
+### Creating (reduce inconsistency)
+| Command | When to Use |
+|---------|-------------|
+| `/test` | Generate tests that catch real bugs |
+| `/create` | Generate components matching existing patterns |
+| `/scaffold` | Create entire project structures |
 
-All agents include `tools:` and `model:` specifications for proper isolation.
+### Investigating (reduce debugging time)
+| Command | When to Use |
+|---------|-------------|
+| `/debug` | Systematic, debiased problem-solving |
+| `/check-perf` | Find what will be slow at scale |
+| `/check-errors` | Find where errors get swallowed |
+| `/audit-security` | Find vulnerabilities before attackers |
 
-### Analysis Agents
-| Agent | Purpose | Model |
-|-------|---------|-------|
-| `repo-architecture-scanner` | Map structure, tech stack, entry points | sonnet |
-| `codebase-analyzer` | Trace specific flows with precision | sonnet |
-| `dependency-analyzer` | Find cycles, coupling, god modules | sonnet |
-| `performance-analyzer` | Identify bottlenecks, N+1, complexity | sonnet |
-| `dead-code-analyzer` | Find unused code, doc drift | sonnet |
-| `error-flow-analyzer` | Trace error handling, find gaps | sonnet |
-| `state-flow-analyzer` | Map state mutations, race conditions | sonnet |
-| `domain-logic-mapper` | Map business logic, invariants | sonnet |
-| `interface-contract-analyzer` | Audit API contracts, validation | sonnet |
-| `cross-cutting-concern-analyzer` | Check auth, logging, resilience | sonnet |
-| `architecture-synthesizer` | Combine multiple agent reports | opus |
-| `report-critic` | Review reports for accuracy | opus |
+## Error Prevention (Human Factors)
 
-### Specialized Agents
-| Agent | Purpose | Model |
-|-------|---------|-------|
-| `security-scanner` | OWASP vulnerabilities, injection, secrets | opus |
-| `test-analyzer` | Coverage gaps, flaky tests, missing cases | sonnet |
-| `documentation-auditor` | Doc completeness, accuracy, staleness | sonnet |
-| `migration-planner` | Plan framework/version migrations | opus |
-| `refactor-advisor` | Identify refactoring opportunities | sonnet |
-| `complexity-analyzer` | Cyclomatic/cognitive complexity metrics | sonnet |
+Hooks run automatically to catch mistakes before they compound:
 
-### Generation Agents
-| Agent | Purpose | Model |
-|-------|---------|-------|
-| `project-scaffolder` | Scaffold new project structures | sonnet |
-| `feature-generator` | Generate features matching patterns | sonnet |
-| `config-initializer` | Initialize project configurations | sonnet |
+| Hook | Trigger | What It Catches |
+|------|---------|-----------------|
+| `pre-commit` | Before git commit | Secrets, debug code, lint errors |
+| `pre-push` | Before git push | Failing tests, WIP commits |
+| `post-edit` | After file edit | Formatting issues (auto-fixed) |
+| `on-error` | On any error | Suggests debugging steps |
 
-## Commands
+## Cognitive Debiasing
 
-### Analysis Commands
-| Command | Usage | Description |
-|---------|-------|-------------|
-| `/analyze` | `/analyze [type] [path]` | Run analysis |
-| `/trace` | `/trace [function\|path]` | Trace code flow |
-| `/find-dead` | `/find-dead [path]` | Find unused code |
-| `/check-perf` | `/check-perf [path]` | Check performance |
-| `/check-errors` | `/check-errors [path]` | Audit error handling |
-| `/map-deps` | `/map-deps [path]` | Map dependencies |
-| `/audit-security` | `/audit-security [path]` | Security audit |
-| `/explain` | `/explain [function]` | Explain code |
-| `/report` | `/report [type]` | Generate report |
+### In Analysis
+- **Checklists** prevent omission errors
+- **Uncertainty markers** counter overconfidence
+- **Evidence hierarchy** counters naming bias
+- **Multiple hypotheses** counter confirmation bias
 
-### Development Commands
-| Command | Usage | Description |
-|---------|-------|-------------|
-| `/fix` | `/fix [type] [path]` | Auto-fix issues |
-| `/test` | `/test [file]` | Generate tests |
-| `/review` | `/review [file\|PR]` | Code review |
-| `/document` | `/document [file]` | Generate docs |
-| `/refactor` | `/refactor [file]` | Suggest refactoring |
-| `/migrate` | `/migrate [from] [to]` | Plan migrations |
-| `/debug` | `/debug [issue]` | Systematic debugging |
-| `/scaffold` | `/scaffold [type] [name]` | Scaffold project |
-| `/create` | `/create [type] [name]` | Generate feature |
-| `/init` | `/init [config-type]` | Initialize configs |
+### In Decision-Making
+- **Impact prioritization** counters recency bias
+- **STOP protocol** counters action bias
+- **Prioritization matrix** structures trade-offs
+- **Verification criteria** define "done"
 
-## Skills
+## Knowledge Sharing (Organizational Behavior)
 
-Skills use the proper `SKILL.md` directory format:
+### Output Structured for Different Audiences
 
-```
-.claude/skills/
-├── analyze-codebase/SKILL.md
-├── analyze-architecture/SKILL.md
-├── analyze-dependencies/SKILL.md
-├── analyze-performance/SKILL.md
-├── analyze-dead-code/SKILL.md
-├── analyze-errors/SKILL.md
-├── analyze-state/SKILL.md
-├── analyze-domain/SKILL.md
-├── analyze-api/SKILL.md
-├── analyze-cross-cutting/SKILL.md
-├── generate-report/SKILL.md
-├── generate-feature/SKILL.md
-├── scaffold-project/SKILL.md
-└── init-config/SKILL.md
-```
+| Audience | Time | What They Need |
+|----------|------|----------------|
+| Executives | 30 sec | Health status, top risk, decision needed |
+| Tech Leads | 5 min | Scorecard, priorities, owners |
+| Engineers | 30 min | Full details, exact locations, fix steps |
 
-## Hooks
+### Shared Mental Models
 
-Hooks are configured in `.claude/settings.json` and use executable scripts:
-
-### Configuration (settings.json)
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash(git commit*)",
-        "command": [".claude/scripts/pre-commit.sh"]
-      },
-      {
-        "matcher": "Bash(git push*)",
-        "command": [".claude/scripts/pre-push.sh"]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "command": [".claude/scripts/post-edit.sh", "$FILE_PATH"]
-      }
-    ]
-  }
-}
-```
-
-### Available Scripts
-| Script | Trigger | Checks |
-|--------|---------|--------|
-| `pre-commit.sh` | Before git commit | Secrets, debug code, lint |
-| `pre-push.sh` | Before git push | Tests, WIP commits, large files |
-| `post-edit.sh` | After file edit | Auto-format by file type |
-| `on-error.sh` | On errors | Contextual suggestions |
-
-## Workflows
-
-Multi-step automated processes:
-
-| Workflow | Purpose |
-|----------|---------|
-| `new-project` | Complete project creation workflow |
-| `add-feature` | 9-phase feature development workflow |
-| `onboarding` | New developer onboarding |
-| `pr-review` | Comprehensive PR review process |
-| `release-prep` | Pre-release checklist |
-| `incident-response` | Debug production issues |
-| `tech-debt-audit` | Quarterly tech debt review |
-
-## Templates
-
-Language/framework-specific patterns:
-
-| Template | Languages/Frameworks |
-|----------|---------------------|
-| `python.md` | Python, pytest, Black, Ruff |
-| `typescript.md` | TypeScript, ESLint, Prettier |
-| `golang.md` | Go, gofmt, golint |
-| `rust.md` | Rust, rustfmt, clippy |
-| `react.md` | React, hooks, testing-library |
-| `project-api.md` | REST API project structure |
-| `project-cli.md` | CLI application structure |
-| `project-webapp.md` | Web application structure |
-| `project-library.md` | Reusable library structure |
-
-## Prompts
-
-Reusable prompt modes:
-
-| Prompt | Purpose |
-|--------|---------|
-| `explain-like-5` | Simple explanations of complex topics |
-| `rubber-duck` | Debugging companion |
-| `devil-advocate` | Challenge assumptions |
-| `senior-review` | Senior engineer perspective |
-| `security-mindset` | Think like an attacker |
+- Visual diagrams for spatial thinkers
+- Tables for structured data
+- Code blocks for flows
+- Consistent terminology
 
 ## Customization
 
-### Add Project-Specific Rules
-
-Create `.claude/rules.local.md` (won't be overwritten):
-
-```markdown
-# Project-Specific Rules
-
-## Tech Stack
-- Python 3.11+ with FastAPI
-- PostgreSQL database
-
-## Conventions
-- Use Pydantic for validation
-- Async handlers only
-```
-
-### Add Custom Commands
-
-Create `.md` files in `.claude/commands/`:
-
-```markdown
----
-name: my-command
-description: "What it does"
----
-
-# My Command
-
-Instructions for Claude...
-```
-
-### Add Custom Skills
-
-Create a directory in `.claude/skills/` with `SKILL.md`:
-
-```markdown
----
-name: my-skill
-description: "What it does"
----
-
-# My Skill
-
-Instructions for Claude...
-```
-
-### Apply Language Template
-
+### Project-specific rules
 ```bash
-cat .claude/templates/python.md >> .claude/rules.local.md
+# Create .claude/rules.local.md
 ```
 
-## Key Improvements (v2)
+### Custom commands
+```bash
+# Add .md files to .claude/commands/
+```
 
-1. **Proper Hook Configuration** - Hooks are now in `settings.json` with executable scripts
-2. **SKILL.md Format** - Skills use the correct directory structure
-3. **Agent Tool Specs** - All agents have `tools:` and `model:` specifications
-4. **CLAUDE.md Root File** - Primary configuration entry point
-5. **Executable Scripts** - Real shell scripts for automation
+### Custom skills
+```bash
+# Add directories to .claude/skills/<name>/SKILL.md
+```
+
+## Sources & Further Reading
+
+### Decision Science & Cognitive Biases
+- [Cognitive Biases in Software Development](https://dl.acm.org/doi/10.1145/3517217) - Communications of the ACM
+- [Atlassian: How Cognitive Biases Influence Software Development](https://www.atlassian.com/blog/add-ons/how-cognitive-biases-influence-software-development)
+
+### Human Factors Engineering
+- [Human Error Analysis in Software Engineering](https://www.intechopen.com/chapters/54996) - IntechOpen
+- [Human Factors in Safety-Critical Systems](https://link.springer.com/chapter/10.1007/978-1-4471-0937-2_27) - Springer
+
+### Cognitive Load & Developer Experience
+- [Cognitive Load in Software Development](https://github.com/zakirullin/cognitive-load) - GitHub
+- [Cognitive Load Theory](https://thevaluable.dev/cognitive-load-theory-software-developer/) - The Valuable Dev
+
+### CLI Design & HCI
+- [Command Line Interface Guidelines](https://clig.dev/) - clig.dev
+- [UX Patterns for CLI Tools](https://www.lucasfcosta.com/blog/ux-patterns-cli-tools) - Lucas Costa
+
+### Organizational Behavior
+- [Knowledge Sharing in Organizations](https://www.tandfonline.com/doi/full/10.1080/23311975.2023.2195027) - Cogent Business
+- [Atlassian: Knowledge Sharing Culture](https://www.atlassian.com/work-management/knowledge-sharing/culture)
+
+### Software Craftsmanship
+- Clean Code (Robert C. Martin)
+- The Pragmatic Programmer (Hunt & Thomas)
 
 ## License
 

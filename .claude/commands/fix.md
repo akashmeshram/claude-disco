@@ -1,62 +1,40 @@
 ---
 name: fix
-description: "Auto-fix issues in code. Usage: /fix [issue-type] [path]"
+description: "Auto-fix code issues. Usage: /fix [type] [path]"
 ---
 
-# Fix Command
+# /fix
 
-Automatically fix issues identified by analysis.
+Automatically fix common code issues.
 
-## Usage
+## Examples
 
+```bash
+/fix lint                   # Fix all lint errors
+/fix lint src/              # Fix lint errors in src/
+/fix types                  # Fix TypeScript errors
+/fix imports                # Organize and fix imports
+/fix format                 # Apply code formatting
 ```
-/fix                        # Fix all auto-fixable issues
-/fix lint                   # Fix linting issues
-/fix types                  # Fix type errors
-/fix imports                # Fix/organize imports
-/fix style                  # Fix code style
-/fix [path]                 # Fix issues in specific file
-```
 
-## What It Fixes
+## What Can Be Fixed
 
-| Type | Examples |
-|------|----------|
-| `lint` | Unused variables, missing semicolons |
-| `types` | Type annotations, null checks |
-| `imports` | Unused imports, sort order |
-| `style` | Formatting, naming conventions |
-| `security` | Simple security issues |
-
-## Process
-
-1. Run appropriate analysis agent
-2. Identify auto-fixable issues
-3. Apply fixes with minimal changes
-4. Show diff of changes
-5. Ask for confirmation before saving
-
-## Output
-
-```
-### Issues Found
-| Type | Count | Auto-fixable |
-|------|-------|--------------|
-
-### Proposed Fixes
-[file.py]
-- Line 5: Remove unused import 'os'
-- Line 23: Add type annotation
-
-### Diff Preview
-[Show unified diff]
-
-Apply fixes? (y/n)
-```
+| Type | What It Does |
+|------|--------------|
+| `lint` | ESLint, Ruff, golint issues |
+| `types` | TypeScript/type annotation errors |
+| `imports` | Unused imports, organization |
+| `format` | Prettier, Black, gofmt |
+| `deps` | Package.json/requirements.txt issues |
 
 ## Safety
 
-- Never fix logic issues automatically
-- Always show diff before applying
-- Keep original behavior intact
-- Skip ambiguous fixes
+- **Preview first**: Shows what will change before changing
+- **Atomic commits**: Each fix type is a separate commit (if requested)
+- **Reversible**: All changes can be undone via git
+
+## When It Won't Help
+
+- Logic errors - those need understanding, not automation
+- Architectural issues - use `/refactor` instead
+- Test failures - use `/debug` to understand why

@@ -5,7 +5,28 @@ description: "Quarterly technical debt review workflow"
 
 # Technical Debt Audit Workflow
 
-Periodic assessment of codebase health.
+Periodic assessment of codebase health—designed using decision science to prioritize objectively and communicate effectively.
+
+## Why Regular Audits Matter
+
+```
+Technical debt compounds like financial debt:
+  Small issues ignored → Medium problems tolerated → Large crises demanded
+
+Regular audits catch debt before it becomes critical.
+```
+
+## Cognitive Debiasing
+
+### Audit Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Recency** | Recent issues seem worst | Score against consistent criteria |
+| **Availability** | Flagging memorable issues | Use systematic checklist |
+| **Anchoring** | First audit section dominates | Review all before prioritizing |
+| **Sunk cost** | "We already invested in this" | Evaluate current state only |
+| **Normalization** | "It's always been like this" | Compare to industry standards |
 
 ## Phase 1: Automated Analysis
 
@@ -145,3 +166,62 @@ Impact   │            │             │
 1. Allocate X% of sprint capacity to debt
 2. Address critical security issues immediately
 3. Schedule major refactoring for [date]
+
+## Human Factors
+
+### Why Debt Audits Fail
+
+| Failure | Cause | Prevention |
+|---------|-------|------------|
+| Ignored report | Too long, no priorities | Executive summary first |
+| No action | No ownership | Assign owners to each item |
+| Audit fatigue | Quarterly burden | Automate metrics collection |
+| Blame culture | Debt = failure | Debt is normal, ignoring it isn't |
+
+### Communication for Different Audiences
+
+| Audience | What They Care About |
+|----------|---------------------|
+| **Executives** | Risk, cost, decision needed |
+| **Tech leads** | Priorities, owners, timeline |
+| **Engineers** | Specifics, locations, how to fix |
+
+### Making Debt Visible
+
+Debt that isn't visible doesn't get fixed:
+- Dashboard showing debt metrics
+- Debt items in sprint backlog
+- Regular (brief) status updates
+- Celebrate debt reduction
+
+## Decision Science
+
+### Objective Prioritization
+
+Avoid subjective "feels important." Use scoring:
+
+```
+Priority Score = (Impact × 2 + Risk × 1.5) / (Effort + 1)
+
+Where:
+- Impact: 1-5 (business/developer impact)
+- Risk: 1-5 (consequences of not fixing)
+- Effort: 1-5 (days/weeks to fix)
+```
+
+### Debt Budget Allocation
+
+Research suggests sustainable debt allocation:
+- 15-20% of engineering time on debt reduction
+- Higher when debt is critical
+- Lower when shipping is critical
+
+### When to Declare "Debt Bankruptcy"
+
+Sometimes rewriting is cheaper than paying off debt:
+- Debt fixes would touch most of the codebase
+- No one understands the code anymore
+- Tests don't exist to verify fixes
+- Business requirements have changed fundamentally
+
+This is a major decision requiring stakeholder alignment.

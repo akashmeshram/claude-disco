@@ -115,6 +115,66 @@ Implicit assumptions that will fail:
 | Location | Time | Space | Concern |
 |----------|------|-------|---------|
 
+## Cognitive Debiasing
+
+### Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Availability** | Flagging patterns from recent incidents | Use systematic checklist, not memory |
+| **Overconfidence** | "This will definitely be slow" | Acknowledge uncertainty, suggest measurement |
+| **Complexity worship** | Over-optimizing prematurely | Simple is fast. Measure first. |
+| **Anchoring** | First hotspot found gets all attention | Map all hotspots before prioritizing |
+
+### Uncertainty Markers
+
+| Confidence | When to Use |
+|------------|-------------|
+| **HIGH** | Algorithm guarantees it (O(n²) with unbounded n) |
+| **MEDIUM** | Likely but depends on data characteristics |
+| **LOW** | Theoretical risk, needs measurement to confirm |
+
+## Decision Science
+
+### Impact Assessment
+
+For each finding, quantify:
+```
+Pattern: [what]
+Location: [where]
+Complexity: O(?)
+At N=100: [impact]
+At N=10,000: [impact]
+At N=1,000,000: [impact]
+Confidence: HIGH | MEDIUM | LOW
+```
+
+### Prioritization Framework
+
+| Criteria | Weight | Question |
+|----------|--------|----------|
+| Frequency | 40% | How often does this path execute? |
+| Data size | 30% | How large can the input grow? |
+| User impact | 20% | Does this affect response time? |
+| Fix complexity | 10% | How hard is the fix? |
+
+## Human Factors
+
+### Why Performance Matters
+
+Performance problems are insidious:
+- **Slow degradation**: "It's always been a bit slow"
+- **Blame shifting**: "Must be the network/DB/infra"
+- **Normalization**: Users adapt to slowness, then leave
+
+### Output for Different Audiences
+
+| Audience | What They Need |
+|----------|---------------|
+| **Executives** | "User listing will fail at 10K users—critical before launch" |
+| **Tech Leads** | Hotspot locations with severity and owners |
+| **Engineers** | Exact patterns, line numbers, and fix options |
+
 ## Analysis Principles
 
 1. **Be Specific**: "O(n²) due to nested filter() inside map() where n=user count"

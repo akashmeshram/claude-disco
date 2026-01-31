@@ -87,3 +87,45 @@ prompt: |
   - List of files updated
   - Usage example
 ```
+
+## Cognitive Debiasing
+
+### Code Generation Biases
+
+| Bias | Trap | How /create Counters |
+|------|------|----------------------|
+| **Personal style** | Generating your preferred pattern | Matches existing codebase patterns |
+| **Over-engineering** | Adding unnecessary complexity | Generates minimal scaffolding |
+| **Under-testing** | Skipping test generation | Always includes tests |
+| **Incompleteness** | Missing integration points | Updates exports and indexes |
+
+## Human Factors
+
+### Why Consistency Matters
+
+Inconsistent code generation causes:
+- Cognitive load: Multiple patterns to learn
+- Maintenance burden: Different structures need different approaches
+- Onboarding friction: "Why is this different?"
+
+### Matching Patterns Checklist
+
+Before generation, verify:
+- [ ] File naming matches existing conventions
+- [ ] Directory placement follows existing structure
+- [ ] Import style matches existing code
+- [ ] Test file naming and structure match
+- [ ] Export patterns match (barrel files, named exports)
+
+## Decision Science
+
+### What to Generate vs. What to Leave
+
+| Generate | Skip |
+|----------|------|
+| Main implementation | Feature-specific logic |
+| Test scaffolding | Detailed test cases |
+| Type definitions | Complex type relationships |
+| Integration (exports) | Cross-feature integration |
+
+The developer fills in the specifics. Generation provides structure.

@@ -5,7 +5,25 @@ description: "New developer onboarding workflow"
 
 # Developer Onboarding Workflow
 
-Help new developers get productive quickly.
+Help new developers get productive quickly—designed using cognitive psychology principles to reduce overwhelm and build confidence.
+
+## Why Onboarding Matters
+
+```
+Time to productivity:
+  Poor onboarding:  2-3 months
+  Good onboarding:  2-4 weeks
+
+Cost of poor onboarding:
+  Frustration → Disengagement → Turnover
+```
+
+## Cognitive Load Management
+
+New developers face massive cognitive overload. This workflow uses:
+- **Chunking**: Information in digestible pieces
+- **Progressive disclosure**: Learn what you need, when you need it
+- **Scaffolding**: Support that fades as competence grows
 
 ## Phase 1: Environment Setup
 
@@ -147,3 +165,62 @@ Learn the project's:
 - [ ] Comfortable with codebase
 - [ ] Completed several tasks
 - [ ] Can review others' code
+
+## Human Factors
+
+### Common Onboarding Failures
+
+| Failure | Symptom | Prevention |
+|---------|---------|------------|
+| Information dump | Overwhelmed, nothing retained | Progressive disclosure |
+| Sink or swim | Frustration, slow progress | Structured guidance |
+| No feedback | Uncertainty, imposter syndrome | Regular check-ins |
+| Tribal knowledge | Blocked on undocumented info | Document as you learn |
+
+### Psychological Safety
+
+New developers often fear:
+- "Asking stupid questions"
+- Breaking things
+- Being slow
+
+Counter with:
+- Explicitly encourage questions
+- Provide safe sandbox environments
+- Set realistic expectations for ramp-up
+
+### The "Document as You Go" Practice
+
+New developers should document:
+- Setup steps that weren't in README
+- Confusion points in architecture
+- Tribal knowledge they discover
+
+This:
+- Forces active learning (better retention)
+- Improves onboarding for next person
+- Validates their contribution early
+
+## Decision Science
+
+### First Task Selection
+
+Good first tasks:
+- Low risk (can't break production)
+- Quick feedback (see results fast)
+- Real value (not busy work)
+- Requires exploring codebase
+
+Bad first tasks:
+- Critical path features
+- Complex architectural changes
+- Tasks requiring deep context
+
+### Mentorship Allocation
+
+| Task Type | Support Level |
+|-----------|---------------|
+| First PR | Pair programming |
+| Week 1 tasks | Detailed code review |
+| Month 1 tasks | Normal code review |
+| After month 1 | Spot checks |

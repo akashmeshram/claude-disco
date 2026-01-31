@@ -52,3 +52,50 @@ Silent failures: X | Missing handlers: Y | Inconsistent: Z
 3. Flag silent swallows as CRITICAL
 4. Note where error details are lost
 5. Check async/promise error handling
+
+## Cognitive Debiasing
+
+### Error Analysis Biases
+
+| Bias | Trap | How /check-errors Counters |
+|------|------|---------------------------|
+| **Happy path focus** | Only reviewing success paths | Explicitly traces error paths |
+| **Optimism** | "That exception won't happen" | Assumes all exceptions happen |
+| **Complexity avoidance** | Skipping tangled try/catch | Tangled = higher priority |
+| **Confirmation** | Checking expected error patterns | Systematic scan of all paths |
+
+## Human Factors
+
+### Why Error Handling Gets Missed
+
+- **Invisible work**: Good error handling isn't visible until things fail
+- **Time pressure**: "Handle errors later" (later never comes)
+- **Complexity**: Error handling often harder than happy path
+- **Testing difficulty**: Errors are hard to reproduce in tests
+
+### The 3 AM Test
+
+For each error path, ask:
+- Can the oncall engineer understand what failed?
+- Is there enough context to debug?
+- Is the error actionable?
+
+## Decision Science
+
+### Error Handling Priority
+
+| Pattern | Severity | Why |
+|---------|----------|-----|
+| Silent catch | CRITICAL | Data corruption, mystery bugs |
+| Lost context | HIGH | Hours of debugging wasted |
+| Missing handler | MEDIUM | Uncaught exception crashes |
+| Inconsistent returns | LOW | Confusion, not failure |
+
+### When to Suppress Errors
+
+Almost never, but exceptions exist:
+- Truly optional operations (analytics, logging)
+- Expected conditions (cache miss)
+- Documented intentional ignoring
+
+Even then, log that you're ignoring.

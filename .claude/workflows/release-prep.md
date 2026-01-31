@@ -5,7 +5,17 @@ description: "Pre-release checklist workflow"
 
 # Release Preparation Workflow
 
-Ensure quality releases every time.
+Ensure quality releases every time—designed using human factors engineering to prevent release failures.
+
+## Why Checklists Matter
+
+```
+Aviation accident rate dropped 90% after checklist adoption.
+Software release failures follow similar patterns:
+  Skipped step → Bug ships → Incident → Postmortem → "Use a checklist"
+
+This workflow is that checklist.
+```
 
 ## Phase 1: Pre-Release Checks
 
@@ -171,3 +181,61 @@ If issues detected:
 - [ ] Communication plan
 - [ ] Extended monitoring
 - [ ] Support team briefed
+
+## Cognitive Debiasing
+
+### Release Biases to Counter
+
+| Bias | Trap | Counter |
+|------|------|---------|
+| **Optimism** | "It works in staging" | Production is different |
+| **Time pressure** | "Ship now, fix later" | Bugs shipped = incidents |
+| **Sunk cost** | "We've already done the work" | Bad release costs more than delay |
+| **Groupthink** | "Everyone thinks it's ready" | Use checklist, not consensus |
+
+### Pre-Release Reality Check
+
+Before release, answer honestly:
+- Would you deploy this on a Friday afternoon?
+- What's the worst-case if something goes wrong?
+- Is the rollback plan tested?
+- Does the team have capacity to respond to issues?
+
+## Human Factors
+
+### Why Releases Fail
+
+| Failure | Common Cause | Prevention |
+|---------|--------------|------------|
+| Missing test | Skipped under pressure | Checklist enforcement |
+| Bad config | Env mismatch | Environment checklist |
+| Incomplete rollback | Never tested | Practice rollback regularly |
+| Poor communication | Assumed others knew | Explicit notification step |
+
+### Release Fatigue Prevention
+
+High-stress releases lead to mistakes:
+- **No Friday deploys** (unless necessary)
+- **No release after long day** (tired people make errors)
+- **Two-person rule** (for critical steps)
+- **Post-release cool-off** (monitor before celebrating)
+
+## Decision Science
+
+### Release Go/No-Go Criteria
+
+| Criteria | GO | NO-GO |
+|----------|----|----|
+| Tests passing | 100% | < 100% critical tests |
+| Security scan | No critical/high | Any critical |
+| Performance | Within baseline | Regression detected |
+| Rollback tested | Yes | No |
+| Team capacity | Available to respond | Skeleton crew |
+
+### Version Decision Matrix
+
+| Change Type | Version Bump | Communication |
+|-------------|-------------|---------------|
+| Bug fix only | Patch (x.x.1) | Release notes |
+| New feature | Minor (x.1.0) | Announcement |
+| Breaking change | Major (1.0.0) | Migration guide + notice |

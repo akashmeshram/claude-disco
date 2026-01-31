@@ -73,3 +73,51 @@ Plan and execute code migrations.
 4. Execute incrementally
 5. Verify at each step
 6. Document changes
+
+## Cognitive Debiasing
+
+### Migration Biases to Counter
+
+| Bias | Trap | How /migrate Counters |
+|------|------|----------------------|
+| **Planning fallacy** | "This will take 2 weeks" | Reference class: similar migrations typically take X |
+| **Optimism** | "The upgrade will be smooth" | Lists all breaking changes explicitly |
+| **Sunk cost** | Continuing failing migration | Rollback plan always available |
+| **Anchoring** | Changelog says "minor" | Counts actual affected files |
+
+### Estimation Reality Check
+
+Before providing estimates, this command:
+1. Counts affected files (not guesses)
+2. Checks similar past migrations
+3. Adds buffer for unexpected issues (50-100%)
+4. Includes testing and rollback planning time
+
+## Human Factors
+
+### Why Migrations Fail
+
+| Failure | Cause | Prevention |
+|---------|-------|------------|
+| Scope creep | "While we're migrating..." | Strict scope, separate PRs |
+| Big bang | All-at-once changes | Incremental migration |
+| No rollback | "It'll work" | Plan before starting |
+| Inadequate testing | "Works locally" | Full test suite at each step |
+
+### Migration Stress Reduction
+
+- **Feature flags**: Run old and new in parallel
+- **Canary deployment**: Test on subset of traffic
+- **Incremental**: Small steps, frequent verification
+- **Reversible**: Every step can be undone
+
+## Decision Science
+
+### Go/No-Go Checklist
+
+Before starting a migration:
+- [ ] Benefit clearly outweighs cost and risk
+- [ ] Test coverage adequate for verification
+- [ ] Team capacity available
+- [ ] Rollback plan documented
+- [ ] Stakeholders informed and aligned

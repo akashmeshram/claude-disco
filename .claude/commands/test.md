@@ -3,74 +3,95 @@ name: test
 description: "Generate tests for code. Usage: /test [file|function]"
 ---
 
-# Test Command
+# /test
 
-Generate comprehensive tests for code.
+Generate meaningful tests, not just coverage theater.
 
-## Usage
+## Examples
 
-```
-/test                       # Analyze and suggest tests
-/test path/to/file.py       # Generate tests for file
-/test MyClass.method        # Generate tests for specific method
-/test --coverage            # Focus on uncovered code
-```
-
-## Process
-
-1. Analyze the code structure
-2. Identify testable units
-3. Determine test cases needed
-4. Generate test code
-5. Show coverage improvement
-
-## Test Cases Generated
-
-| Category | Examples |
-|----------|----------|
-| Happy path | Normal input, expected output |
-| Edge cases | Empty, null, boundary values |
-| Error cases | Invalid input, exceptions |
-| Integration | Component interactions |
-
-## Output
-
-```
-### Test Plan for `user_service.py`
-
-#### Functions to Test
-| Function | Cases | Priority |
-|----------|-------|----------|
-| create_user | 5 | High |
-| validate_email | 4 | High |
-| get_user | 3 | Medium |
-
-### Generated Tests
-
-```python
-import pytest
-from user_service import create_user, validate_email
-
-class TestCreateUser:
-    def test_creates_user_with_valid_data(self):
-        ...
-    
-    def test_raises_on_duplicate_email(self):
-        ...
-    
-    def test_handles_empty_name(self):
-        ...
+```bash
+/test src/utils.ts          # Generate tests for a file
+/test parseDate             # Generate tests for a function
+/test src/api/              # Generate tests for a directory
 ```
 
-### Coverage Impact
-Before: 65%
-After: 82% (+17%)
-```
+## What You Get
 
-## Test Frameworks
+- **Unit tests** for pure functions
+- **Edge cases** (null, empty, boundary values)
+- **Error paths** (what happens when things fail)
+- **Integration tests** when functions touch external systems
 
-Detects and uses project's test framework:
+## Test Philosophy
+
+Tests answer: "If this breaks, will the test catch it?"
+
+Not generated:
+- Tests that just verify the implementation
+- Tests that require complex mocks with no value
+- Tests for trivial getters/setters
+
+## Framework Detection
+
+Automatically uses your project's testing setup:
+- JavaScript: Jest, Vitest, Mocha
 - Python: pytest, unittest
-- JavaScript: jest, vitest, mocha
-- Go: testing
-- Rust: built-in
+- Go: testing package
+- Rust: built-in test framework
+
+## Tips
+
+- Review generated tests - they're suggestions, not gospel
+- Add your own edge cases - you know the business logic
+- Delete tests that don't catch real bugs
+
+## Cognitive Debiasing
+
+### Test Generation Biases to Counter
+
+| Bias | Trap | How /test Counters |
+|------|------|-------------------|
+| **Happy path focus** | Only testing success cases | Explicitly generates error cases |
+| **Coverage theater** | High % without real verification | Tests for behavior, not lines |
+| **Familiarity** | Testing what you expect to break | Systematic edge case generation |
+| **Optimism** | "This can't fail" | Assumes it will fail, tests how |
+
+## Human Factors
+
+### Why Developers Skip Tests
+
+- **Time pressure**: "I'll add tests later"
+- **Uncertain value**: "Will this catch bugs?"
+- **Mocking complexity**: External dependencies are hard
+- **Maintenance burden**: Tests need updates too
+
+### Making Testing Easier
+
+Generated tests are:
+- **Runnable immediately** - No setup required
+- **Documented** - Clear what's being tested
+- **Focused** - One assertion per test
+- **Maintainable** - Test behavior, not implementation
+
+## Decision Science
+
+### Test Priority Matrix
+
+| Code Characteristic | Test Priority | Why |
+|--------------------|---------------|-----|
+| Handles money/auth | CRITICAL | Failure = breach/loss |
+| Complex logic | HIGH | Likely to have bugs |
+| Frequently changed | HIGH | Regression risk |
+| Simple/stable | MEDIUM | Less likely to break |
+| Trivial getters | LOW | Cost > benefit |
+
+### Test ROI
+
+```
+Test value = (Bug probability × Bug cost × Detection rate)
+Test cost = Writing time + Maintenance time + Run time
+
+Test when: Value > Cost
+```
+
+Generated tests prioritize high-value scenarios.
