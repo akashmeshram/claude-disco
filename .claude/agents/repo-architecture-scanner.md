@@ -1,6 +1,8 @@
 ---
 name: repo-architecture-scanner
 description: "Map repository structure, tech stack, and entry points. Use for onboarding, documentation, or understanding unfamiliar codebases."
+tools: [Read, Glob, Grep, Bash]
+model: sonnet
 ---
 
 You are an expert at quickly mapping unfamiliar codebases to help developers navigate and understand them.

@@ -1,18 +1,20 @@
-# Claude Code Config
+# Claude Code Configuration Framework
 
-Portable, reusable Claude Code configuration with analysis agents, skills, commands, workflows, templates, hooks, and prompts.
+Portable, reusable Claude Code configuration with specialized agents, skills, commands, workflows, templates, and automation hooks.
 
 ## What's Included
 
 ```
 .claude/
+├── settings.json     # Hook configurations (auto-executed)
 ├── rules.md          # Code quality & analysis standards
-├── agents/           # 17 specialized analysis agents
-├── skills/           # 11 invocable skills
-├── commands/         # 15 slash commands
-├── workflows/        # 5 multi-step workflows
-├── templates/        # 5 language/framework templates
-├── hooks/            # 4 automation hooks
+├── agents/           # 21 specialized agents with tool specs
+├── skills/           # 14 invocable skills (SKILL.md format)
+├── commands/         # 19 slash commands
+├── workflows/        # 7 multi-step workflows
+├── templates/        # 9 language/framework templates
+├── hooks/            # Hook documentation
+├── scripts/          # Executable hook scripts
 └── prompts/          # 5 reusable prompt modes
 ```
 
@@ -21,6 +23,7 @@ Portable, reusable Claude Code configuration with analysis agents, skills, comma
 ```bash
 # Copy to your project
 cp -r .claude /path/to/your/project/
+cp CLAUDE.md /path/to/your/project/
 
 # Or use the install script
 ./install.sh /path/to/your/project
@@ -28,31 +31,40 @@ cp -r .claude /path/to/your/project/
 
 ## Agents
 
-### Analysis Agents
-| Agent | Purpose |
-|-------|---------|
-| `repo-architecture-scanner` | Map structure, tech stack, entry points |
-| `codebase-analyzer` | Trace specific flows with precision |
-| `dependency-analyzer` | Find cycles, coupling, god modules |
-| `performance-analyzer` | Identify bottlenecks, N+1, complexity |
-| `dead-code-analyzer` | Find unused code, doc drift |
-| `error-flow-analyzer` | Trace error handling, find gaps |
-| `state-flow-analyzer` | Map state mutations, race conditions |
-| `domain-logic-mapper` | Map business logic, invariants |
-| `interface-contract-analyzer` | Audit API contracts, validation |
-| `cross-cutting-concern-analyzer` | Check auth, logging, resilience |
-| `architecture-synthesizer` | Combine multiple agent reports |
-| `report-critic` | Review reports for accuracy |
+All agents include `tools:` and `model:` specifications for proper isolation.
 
-### New Specialized Agents
-| Agent | Purpose |
-|-------|---------|
-| `security-scanner` | OWASP vulnerabilities, injection, secrets |
-| `test-analyzer` | Coverage gaps, flaky tests, missing cases |
-| `documentation-auditor` | Doc completeness, accuracy, staleness |
-| `migration-planner` | Plan framework/version migrations |
-| `refactor-advisor` | Identify refactoring opportunities |
-| `complexity-analyzer` | Cyclomatic/cognitive complexity metrics |
+### Analysis Agents
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `repo-architecture-scanner` | Map structure, tech stack, entry points | sonnet |
+| `codebase-analyzer` | Trace specific flows with precision | sonnet |
+| `dependency-analyzer` | Find cycles, coupling, god modules | sonnet |
+| `performance-analyzer` | Identify bottlenecks, N+1, complexity | sonnet |
+| `dead-code-analyzer` | Find unused code, doc drift | sonnet |
+| `error-flow-analyzer` | Trace error handling, find gaps | sonnet |
+| `state-flow-analyzer` | Map state mutations, race conditions | sonnet |
+| `domain-logic-mapper` | Map business logic, invariants | sonnet |
+| `interface-contract-analyzer` | Audit API contracts, validation | sonnet |
+| `cross-cutting-concern-analyzer` | Check auth, logging, resilience | sonnet |
+| `architecture-synthesizer` | Combine multiple agent reports | opus |
+| `report-critic` | Review reports for accuracy | opus |
+
+### Specialized Agents
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `security-scanner` | OWASP vulnerabilities, injection, secrets | opus |
+| `test-analyzer` | Coverage gaps, flaky tests, missing cases | sonnet |
+| `documentation-auditor` | Doc completeness, accuracy, staleness | sonnet |
+| `migration-planner` | Plan framework/version migrations | opus |
+| `refactor-advisor` | Identify refactoring opportunities | sonnet |
+| `complexity-analyzer` | Cyclomatic/cognitive complexity metrics | sonnet |
+
+### Generation Agents
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `project-scaffolder` | Scaffold new project structures | sonnet |
+| `feature-generator` | Generate features matching patterns | sonnet |
+| `config-initializer` | Initialize project configurations | sonnet |
 
 ## Commands
 
@@ -79,6 +91,67 @@ cp -r .claude /path/to/your/project/
 | `/refactor` | `/refactor [file]` | Suggest refactoring |
 | `/migrate` | `/migrate [from] [to]` | Plan migrations |
 | `/debug` | `/debug [issue]` | Systematic debugging |
+| `/scaffold` | `/scaffold [type] [name]` | Scaffold project |
+| `/create` | `/create [type] [name]` | Generate feature |
+| `/init` | `/init [config-type]` | Initialize configs |
+
+## Skills
+
+Skills use the proper `SKILL.md` directory format:
+
+```
+.claude/skills/
+├── analyze-codebase/SKILL.md
+├── analyze-architecture/SKILL.md
+├── analyze-dependencies/SKILL.md
+├── analyze-performance/SKILL.md
+├── analyze-dead-code/SKILL.md
+├── analyze-errors/SKILL.md
+├── analyze-state/SKILL.md
+├── analyze-domain/SKILL.md
+├── analyze-api/SKILL.md
+├── analyze-cross-cutting/SKILL.md
+├── generate-report/SKILL.md
+├── generate-feature/SKILL.md
+├── scaffold-project/SKILL.md
+└── init-config/SKILL.md
+```
+
+## Hooks
+
+Hooks are configured in `.claude/settings.json` and use executable scripts:
+
+### Configuration (settings.json)
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "command": [".claude/scripts/pre-commit.sh"]
+      },
+      {
+        "matcher": "Bash(git push*)",
+        "command": [".claude/scripts/pre-push.sh"]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": [".claude/scripts/post-edit.sh", "$FILE_PATH"]
+      }
+    ]
+  }
+}
+```
+
+### Available Scripts
+| Script | Trigger | Checks |
+|--------|---------|--------|
+| `pre-commit.sh` | Before git commit | Secrets, debug code, lint |
+| `pre-push.sh` | Before git push | Tests, WIP commits, large files |
+| `post-edit.sh` | After file edit | Auto-format by file type |
+| `on-error.sh` | On errors | Contextual suggestions |
 
 ## Workflows
 
@@ -86,6 +159,8 @@ Multi-step automated processes:
 
 | Workflow | Purpose |
 |----------|---------|
+| `new-project` | Complete project creation workflow |
+| `add-feature` | 9-phase feature development workflow |
 | `onboarding` | New developer onboarding |
 | `pr-review` | Comprehensive PR review process |
 | `release-prep` | Pre-release checklist |
@@ -94,7 +169,7 @@ Multi-step automated processes:
 
 ## Templates
 
-Language/framework-specific rules:
+Language/framework-specific patterns:
 
 | Template | Languages/Frameworks |
 |----------|---------------------|
@@ -103,17 +178,10 @@ Language/framework-specific rules:
 | `golang.md` | Go, gofmt, golint |
 | `rust.md` | Rust, rustfmt, clippy |
 | `react.md` | React, hooks, testing-library |
-
-## Hooks
-
-Automation triggers:
-
-| Hook | Trigger |
-|------|---------|
-| `pre-commit` | Before committing code |
-| `post-edit` | After editing a file |
-| `pre-push` | Before pushing to remote |
-| `on-error` | When errors occur |
+| `project-api.md` | REST API project structure |
+| `project-cli.md` | CLI application structure |
+| `project-webapp.md` | Web application structure |
+| `project-library.md` | Reusable library structure |
 
 ## Prompts
 
@@ -126,22 +194,6 @@ Reusable prompt modes:
 | `devil-advocate` | Challenge assumptions |
 | `senior-review` | Senior engineer perspective |
 | `security-mindset` | Think like an attacker |
-
-## Skills
-
-Skills are invoked with `/skill-name`:
-
-- `/analyze-codebase` - Run analysis agents
-- `/analyze-architecture` - Map repository structure
-- `/analyze-dependencies` - Dependency analysis
-- `/analyze-performance` - Performance audit
-- `/analyze-dead-code` - Dead code detection
-- `/analyze-errors` - Error handling audit
-- `/analyze-state` - State flow analysis
-- `/analyze-domain` - Domain logic mapping
-- `/analyze-api` - API contract analysis
-- `/analyze-cross-cutting` - Cross-cutting concerns
-- `/generate-report` - Full analysis report
 
 ## Customization
 
@@ -176,13 +228,34 @@ description: "What it does"
 Instructions for Claude...
 ```
 
-### Add Language Template
+### Add Custom Skills
 
-Apply a template by copying to rules:
+Create a directory in `.claude/skills/` with `SKILL.md`:
+
+```markdown
+---
+name: my-skill
+description: "What it does"
+---
+
+# My Skill
+
+Instructions for Claude...
+```
+
+### Apply Language Template
 
 ```bash
 cat .claude/templates/python.md >> .claude/rules.local.md
 ```
+
+## Key Improvements (v2)
+
+1. **Proper Hook Configuration** - Hooks are now in `settings.json` with executable scripts
+2. **SKILL.md Format** - Skills use the correct directory structure
+3. **Agent Tool Specs** - All agents have `tools:` and `model:` specifications
+4. **CLAUDE.md Root File** - Primary configuration entry point
+5. **Executable Scripts** - Real shell scripts for automation
 
 ## License
 

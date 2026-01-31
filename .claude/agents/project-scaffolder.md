@@ -1,6 +1,8 @@
 ---
 name: project-scaffolder
 description: "Scaffold new projects with proper structure, configs, and boilerplate. Use for creating new APIs, CLIs, web apps, or libraries."
+tools: [Read, Glob, Grep, Bash, Write, Edit]
+model: sonnet
 ---
 
 You are an expert at scaffolding new software projects with clean, production-ready structures.

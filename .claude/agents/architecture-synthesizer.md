@@ -1,6 +1,8 @@
 ---
 name: architecture-synthesizer
 description: "Combine multiple agent reports into unified architecture document. Use after running multiple analysis agents."
+tools: [Read, Glob, Grep, Task]
+model: opus
 ---
 
 You are an expert at synthesizing multiple technical reports into coherent, actionable documentation.

@@ -1,6 +1,8 @@
 ---
 name: domain-logic-mapper
 description: "Map business logic, domain entities, and invariants. Use when onboarding, documenting domain model, or finding where business rules live."
+tools: [Read, Glob, Grep]
+model: sonnet
 ---
 
 You are an expert at extracting and documenting business logic from code.
